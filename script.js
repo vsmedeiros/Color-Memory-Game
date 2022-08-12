@@ -29,12 +29,14 @@ let lightColor = (element, number) => {
 let checkOrder = () => {
     
   for (let i in clickedOrder) {
-    if (clickedOrder[i] != order[i]) {
+    if (clickedOrder[i] != order[i]  && score!=0) {
+      score--;
       lose();
-      break;
+      return;
     }
+    
   }
-  if (clickedOrder.length == order.length) {
+   if (clickedOrder.length == order.length) {
     setTimeout(() => {
         alert(`Pontuação: ${score}\n Você acertou! Iniciando próximo nível!`);
         nextLevel();
@@ -65,14 +67,13 @@ let nextLevel = () => {
   shuffleOrder();
 };
 let lose = () => {
-  alert(`Pontuação: ${score}!\n Você perdeu o jogo!\n Clique para reinicar!`);
+  alert(`Pontuação: ${score}!\n Você perdeu o jogo!\n Clique START para reinicar!`);
   order = [];
   clickedOrder = [];
-  playGame();
+  score = 0;
 };
 function playGame() {
   alert("Bem vindo ao Color Memory! Iniciando novo jogo!");
-  score = 0;
   nextLevel();
 }
 green.onclick = () => click(0);
